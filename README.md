@@ -6,7 +6,7 @@ Built using HTML, CSS, and JavaScript, this project showcases a professional adv
 ---
 
 ## 🌐 Live Demo
-👉 https://sampleadvocatewebsite.vercel.app
+👉 https://sample_advocate_website.vercel.app
 
 ---
 
