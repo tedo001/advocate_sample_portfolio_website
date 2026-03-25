@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alice Fernandes — Advocate</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0C0C0C;
+  --white: #F4F1EC;
+  --red: #C0392B;
+  --red-dark: #922B21;
+  --grey: #6B6B6B;
+  --grey-light: #D8D4CC;
+  --grey-bg: #EDEBE5;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  cursor: none;
+  overflow-x: hidden;
+}
+
+/* ── CUSTOM CURSOR ── */
+#cursor {
+  position: fixed;
+  width: 10px; height: 10px;
+  background: var(--red);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s;
+}
+#cursor.grow { width: 36px; height: 36px; background: rgba(192,57,43,0.2); }
+body:hover #cursor { display: block; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--white); }
+::-webkit-scrollbar-thumb { background: var(--black); }
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.6rem 4rem;
+  mix-blend-mode: normal;
+  background: rgba(244,241,236,0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--black);
+}
+
+.nav-wordmark {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.08em;
+  color: var(--black);
+  text-decoration: none;
+}
+.nav-wordmark span { color: var(--red); }
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--black);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  position: relative;
+  transition: color 0.25s;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 2px;
+  background: var(--red);
+  transition: width 0.25s;
+}
+.nav-links a:hover { color: var(--red); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  background: var(--black) !important;
+  color: var(--white) !important;
+  padding: 0.55rem 1.4rem;
+  font-size: 0.7rem !important;
+  letter-spacing: 0.18em !important;
+}
+.nav-cta::after { display: none !important; }
+.nav-cta:hover { background: var(--red) !important; color: var(--white) !important; }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  padding-top: 88px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 4rem;
+  border-bottom: 1px solid var(--grey-light);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+.hero-ticker span { color: var(--red); margin-right: 0.6rem; }
+
+.hero-body {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 0;
+  min-height: calc(100vh - 130px);
+}
+
+.hero-text-col {
+  padding: 4rem 4rem 4rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 2px solid var(--black);
+}
+
+.hero-tagline-wrap { overflow: hidden; }
+
+.hero-tagline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(5rem, 11vw, 10rem);
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  color: var(--black);
+  animation: slideUp 0.9s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+.hero-tagline .red { color: var(--red); }
+.hero-tagline .outline {
+  -webkit-text-stroke: 2px var(--black);
+  color: transparent;
+}
+
+.hero-sub-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 3rem;
+  animation: fadeIn 0.8s 0.5s ease both;
+}
+
+.hero-desc {
+  max-width: 480px;
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: var(--grey);
+  font-weight: 300;
+}
+
+.hero-cta-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: flex-end;
+}
+
+.btn-blk {
+  display: inline-block;
+  background: var(--black);
+  color: var(--white);
+  text-decoration: none;
+  padding: 0.9rem 2rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: background 0.25s;
+  white-space: nowrap;
+}
+.btn-blk:hover { background: var(--red); }
+
+.btn-outline {
+  display: inline-block;
+  border: 1.5px solid var(--black);
+  color: var(--black);
+  text-decoration: none;
+  padding: 0.9rem 2rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: all 0.25s;
+  white-space: nowrap;
+}
+.btn-outline:hover { background: var(--black); color: var(--white); }
+
+.hero-right-col {
+  display: flex;
+  flex-direction: column;
+  background: var(--black);
+  color: var(--white);
+  padding: 3rem 2.5rem;
+  justify-content: space-between;
+}
+
+.hero-right-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--grey-light);
+  opacity: 0.6;
+  margin-bottom: 0.6rem;
+}
+
+.hero-right-value {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  color: var(--white);
+}
+
+.hero-stat-block {
+  border-top: 1px solid rgba(244,241,236,0.15);
+  padding-top: 2rem;
+  animation: fadeIn 0.8s 0.6s ease both;
+}
+
+.hero-stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 4.5rem;
+  line-height: 1;
+  color: var(--red);
+  letter-spacing: 0.02em;
+}
+
+.hero-stat-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--grey-light);
+  opacity: 0.7;
+  margin-top: 0.2rem;
+}
+
+.hero-right-photo {
+  flex: 1;
+  margin: 2rem 0;
+  background: #1A1A1A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 280px;
+}
+
+.hero-right-photo::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(to top, var(--black), transparent);
+  z-index: 1;
+}
+
+.hero-right-photo svg { opacity: 0.12; width: 55%; }
+
+/* ── MARQUEE ── */
+.marquee-strip {
+  background: var(--red);
+  overflow: hidden;
+  padding: 0.75rem 0;
+  border-top: 2px solid var(--black);
+  border-bottom: 2px solid var(--black);
+}
+
+.marquee-inner {
+  display: flex;
+  gap: 0;
+  animation: marquee 20s linear infinite;
+  width: max-content;
+}
+
+.marquee-item {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.12em;
+  color: var(--white);
+  padding: 0 3rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.marquee-item::after {
+  content: '◆';
+  font-size: 0.5rem;
+  opacity: 0.7;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ── SECTION COMMONS ── */
+.s-label {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+.s-label::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--red);
+  flex-shrink: 0;
+}
+
+.s-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  letter-spacing: 0.02em;
+  line-height: 0.95;
+  color: var(--black);
+}
+
+.s-heading .italic {
+  font-family: 'DM Serif Display', serif;
+  font-size: 0.82em;
+  font-style: italic;
+  -webkit-text-stroke: 1.5px var(--black);
+  color: transparent;
+}
+
+/* ── ABOUT ── */
+#about {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  min-height: 80vh;
+  border-top: 2px solid var(--black);
+}
+
+.about-left {
+  background: var(--black);
+  padding: 5rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-left::before {
+  content: 'LAW';
+  position: absolute;
+  bottom: -2rem;
+  right: -1rem;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11rem;
+  color: rgba(244,241,236,0.03);
+  letter-spacing: -0.02em;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.about-photo {
+  width: 100%;
+  padding-bottom: 120%;
+  background: #1C1C1C;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+  flex-shrink: 0;
+}
+
+.about-photo-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-photo-inner svg { opacity: 0.1; width: 50%; }
+
+.about-photo::after {
+  content: 'REPLACE\AWITH YOUR\APHOTO';
+  position: absolute;
+  bottom: 1.2rem;
+  left: 1.2rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: rgba(244,241,236,0.25);
+  white-space: pre;
+  line-height: 1.6;
+}
+
+.about-meta-item {
+  margin-bottom: 1.5rem;
+}
+
+.about-meta-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(244,241,236,0.4);
+  margin-bottom: 0.3rem;
+}
+
+.about-meta-value {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1rem;
+  color: var(--white);
+  line-height: 1.4;
+}
+
+.about-right {
+  padding: 5rem 5rem 5rem 5rem;
+  border-left: 2px solid var(--black);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about-body {
+  max-width: 600px;
+}
+
+.about-body p {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: #444;
+  font-weight: 300;
+  margin-bottom: 1.4rem;
+}
+
+.about-body p:first-of-type {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--black);
+  line-height: 1.65;
+}
+
+.quals-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1.5px solid var(--grey-light);
+}
+
+.qual-item {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.qual-bullet {
+  color: var(--red);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.qual-text {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--grey);
+}
+
+/* ── PRACTICE AREAS ── */
+#practice {
+  background: var(--grey-bg);
+  padding: 6rem 4rem;
+  border-top: 2px solid var(--black);
+}
+
+.practice-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: end;
+  margin-bottom: 4rem;
+}
+
+.practice-count {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 8rem;
+  line-height: 1;
+  color: var(--black);
+  opacity: 0.06;
+  text-align: right;
+  letter-spacing: -0.02em;
+}
+
+.practice-areas-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 2px solid var(--black);
+}
+
+.pa-row {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  align-items: stretch;
+  border-bottom: 1.5px solid var(--black);
+  background: var(--white);
+  transition: background 0.25s;
+  overflow: hidden;
+  cursor: default;
+}
+
+.pa-row:last-child { border-bottom: none; }
+.pa-row:hover { background: var(--black); }
+.pa-row:hover .pa-num,
+.pa-row:hover .pa-title,
+.pa-row:hover .pa-desc,
+.pa-row:hover .pa-arrow { color: var(--white); }
+.pa-row:hover .pa-title { color: var(--white); }
+
+.pa-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  color: var(--grey-light);
+  border-right: 1.5px solid var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.25s, border-color 0.25s;
+  padding: 1.8rem 0;
+}
+
+.pa-row:hover .pa-num { border-right-color: rgba(244,241,236,0.15); }
+
+.pa-content {
+  padding: 1.8rem 2rem;
+}
+
+.pa-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.2rem;
+  color: var(--black);
+  margin-bottom: 0.4rem;
+  transition: color 0.25s;
+}
+
+.pa-desc {
+  font-size: 0.8rem;
+  color: var(--grey);
+  line-height: 1.6;
+  transition: color 0.25s;
+}
+
+.pa-arrow {
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  font-size: 1.2rem;
+  color: var(--grey-light);
+  transition: color 0.25s, transform 0.25s;
+}
+
+.pa-row:hover .pa-arrow {
+  transform: translateX(4px);
+  color: var(--red);
+}
+
+/* ── CASES ── */
+#cases {
+  padding: 6rem 4rem;
+  border-top: 2px solid var(--black);
+  background: var(--white);
+}
+
+.cases-header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6rem;
+  align-items: end;
+  margin-bottom: 5rem;
+}
+
+.cases-header-right p {
+  font-size: 0.92rem;
+  line-height: 1.85;
+  color: var(--grey);
+  max-width: 500px;
+}
+
+.cases-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid var(--black);
+}
+
+.cases-table thead tr {
+  background: var(--black);
+  color: var(--white);
+}
+
+.cases-table thead th {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  padding: 1rem 1.5rem;
+  text-align: left;
+}
+
+.cases-table tbody tr {
+  border-bottom: 1px solid var(--grey-light);
+  transition: background 0.2s;
+}
+
+.cases-table tbody tr:last-child { border-bottom: none; }
+.cases-table tbody tr:hover { background: var(--grey-bg); }
+
+.cases-table td {
+  padding: 1.4rem 1.5rem;
+  vertical-align: middle;
+}
+
+.td-year {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  color: var(--red);
+  width: 80px;
+}
+
+.td-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.05rem;
+  color: var(--black);
+  margin-bottom: 0.25rem;
+}
+
+.td-court {
+  font-size: 0.75rem;
+  color: var(--grey);
+  letter-spacing: 0.05em;
+}
+
+.td-area {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+.outcome-tag {
+  display: inline-block;
+  padding: 0.28rem 0.8rem;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 1.5px solid;
+}
+
+.outcome-won { border-color: #27AE60; color: #27AE60; }
+.outcome-settled { border-color: #E67E22; color: #E67E22; }
+.outcome-pending { border-color: var(--grey); color: var(--grey); }
+
+/* ── CONTACT ── */
+#contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 2px solid var(--black);
+  min-height: 70vh;
+}
+
+.contact-left {
+  background: var(--black);
+  padding: 6rem 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-left::before {
+  content: '"';
+  position: absolute;
+  top: -4rem;
+  right: 2rem;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28rem;
+  color: rgba(244,241,236,0.025);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.contact-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 5vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  color: var(--white);
+}
+
+.contact-heading .red { color: var(--red); }
+
+.contact-body {
+  font-size: 0.92rem;
+  line-height: 1.85;
+  color: rgba(244,241,236,0.55);
+  font-weight: 300;
+  margin: 2rem 0 3rem;
+}
+
+.contact-deets {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.c-deet {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+}
+
+.c-deet-icon {
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid rgba(244,241,236,0.2);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--red);
+}
+
+.c-deet-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(244,241,236,0.35);
+  margin-bottom: 0.25rem;
+}
+
+.c-deet-value {
+  font-size: 0.88rem;
+  color: var(--white);
+  line-height: 1.5;
+}
+
+.c-deet-value a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.contact-right {
+  background: var(--grey-bg);
+  padding: 6rem 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact-form-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.2rem;
+  letter-spacing: 0.04em;
+  color: var(--black);
+  margin-bottom: 2.5rem;
+}
+
+.cform {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.cf-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+}
+
+.cf-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.cf-group label {
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.cf-group input,
+.cf-group select,
+.cf-group textarea {
+  background: var(--white);
+  border: 1.5px solid var(--black);
+  color: var(--black);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 300;
+  padding: 0.8rem 1rem;
+  outline: none;
+  transition: border-color 0.25s, background 0.25s;
+  resize: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+.cf-group input:focus,
+.cf-group select:focus,
+.cf-group textarea:focus {
+  border-color: var(--red);
+  background: #FFF9F8;
+}
+
+.cf-group select option { background: var(--white); }
+
+.cf-privacy {
+  font-size: 0.72rem;
+  color: var(--grey);
+  line-height: 1.6;
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+}
+
+.cf-privacy input[type="checkbox"] {
+  accent-color: var(--red);
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+  width: 14px;
+  height: 14px;
+}
+
+.cf-submit {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.btn-submit {
+  background: var(--red);
+  color: var(--white);
+  border: none;
+  padding: 1rem 2.5rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: background 0.25s, transform 0.2s;
+}
+
+.btn-submit:hover { background: var(--red-dark); transform: translateY(-2px); }
+
+.cf-or {
+  font-size: 0.72rem;
+  color: var(--grey);
+  letter-spacing: 0.1em;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--black);
+  padding: 2rem 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 2px solid var(--red);
+}
+
+.footer-wm {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.1em;
+  color: var(--white);
+}
+
+.footer-wm span { color: var(--red); }
+
+.footer-copy {
+  font-size: 0.68rem;
+  color: rgba(244,241,236,0.35);
+  letter-spacing: 0.08em;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.footer-nav a {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(244,241,236,0.45);
+  text-decoration: none;
+  transition: color 0.25s;
+}
+.footer-nav a:hover { color: var(--red); }
+
+/* ── REVEAL ANIMATIONS ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+  nav { padding: 1.2rem 2rem; }
+  .nav-links li:not(:last-child) { display: none; }
+  .hero-body { grid-template-columns: 1fr; }
+  .hero-right-col { display: none; }
+  .hero-text-col { border-right: none; padding: 3rem 2rem; }
+  #about { grid-template-columns: 1fr; }
+  .about-left { padding: 3rem 2rem; }
+  .about-photo { padding-bottom: 70%; }
+  .about-right { padding: 3rem 2rem; border-left: none; border-top: 2px solid var(--black); }
+  .practice-top { grid-template-columns: 1fr; gap: 1rem; }
+  .practice-count { text-align: left; font-size: 5rem; }
+  #cases { padding: 4rem 2rem; }
+  .cases-header { grid-template-columns: 1fr; gap: 1.5rem; }
+  .cases-table { font-size: 0.85rem; }
+  #contact { grid-template-columns: 1fr; }
+  .contact-left { padding: 4rem 2rem; }
+  .contact-right { padding: 4rem 2rem; }
+  footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem; }
+  #practice { padding: 4rem 2rem; }
+}
+
+@media (max-width: 640px) {
+  .hero-tagline { font-size: 4.5rem; }
+  .hero-sub-row { flex-direction: column; align-items: flex-start; gap: 2rem; }
+  .hero-cta-stack { align-items: flex-start; }
+  .cf-row { grid-template-columns: 1fr; }
+  .quals-grid { grid-template-columns: 1fr; }
+  .cases-table thead th:nth-child(3),
+  .cases-table td:nth-child(3) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+
+<nav>
+  <a href="#hero" class="nav-wordmark">ALICE <span>FERNANDES</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#practice">Practice</a></li>
+    <li><a href="#cases">Cases</a></li>
+    <li><a href="#contact" class="nav-cta">Consult Now</a></li>
+  </ul>
+</nav>
+
+<div id="hero">
+  <div class="hero-top-bar">
+    <div class="hero-ticker"><span>●</span> Available for new mandates — 2025</div>
+    <div>General · Multi-practice Advocate · High Court & Supreme Court</div>
+    <div>Est. 2003 · Mumbai & New Delhi</div>
+  </div>
+
+  <div class="hero-body">
+    <div class="hero-text-col">
+      <div>
+        <div class="hero-tagline-wrap">
+          <div class="hero-tagline">
+            YOUR<br>
+            FIGHT<br>
+            IS MY<br>
+            <span class="red outline">CALLING</span>
+          </div>
+        </div>
+
+        <div class="hero-sub-row">
+          <p class="hero-desc">
+            Alice Fernandes is a multi-practice Senior Advocate with 15 years of courtroom authority — representing individuals, corporations, and institutions across criminal, civil, constitutional, and commercial matters from her chambers in Mumbai.
+          </p>
+          <div class="hero-cta-stack">
+            <a href="#contact" class="btn-blk">Book Consultation</a>
+            <a href="#cases" class="btn-outline">Notable Cases →</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:4rem; margin-top:3rem; padding-top:2rem; border-top:1.5px solid var(--grey-light);">
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:3.5rem; line-height:1; color:var(--black);">15+</div>
+          <div style="font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--grey); margin-top:0.3rem;">Years at Bar</div>
+        </div>
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:3.5rem; line-height:1; color:var(--black);">380+</div>
+          <div style="font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--grey); margin-top:0.3rem;">Cases Argued</div>
+        </div>
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:3.5rem; line-height:1; color:var(--red);">92%</div>
+          <div style="font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--grey); margin-top:0.3rem;">Favourable Outcomes</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right-col">
+      <div>
+        <div class="hero-right-label">Enrolled</div>
+        <div class="hero-right-value">Bar Council of India<br>Bar Council of Maharashtra</div>
+      </div>
+      <div class="hero-right-photo">
+        <svg viewBox="0 0 100 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="36" r="24" stroke="#F4F1EC" stroke-width="1.5"/>
+          <path d="M8 130 Q8 80 50 74 Q92 80 92 130" stroke="#F4F1EC" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+      <div class="hero-stat-block">
+        <div>
+          <div class="hero-right-label">Specialisations</div>
+          <div class="hero-right-value" style="font-size:0.88rem; line-height:1.7;">Criminal · Civil · Corporate<br>Constitutional · Family · IP</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <div class="marquee-item">Criminal Defence</div>
+    <div class="marquee-item">Civil Litigation</div>
+    <div class="marquee-item">Corporate Law</div>
+    <div class="marquee-item">Constitutional Matters</div>
+    <div class="marquee-item">Family Law</div>
+    <div class="marquee-item">Intellectual Property</div>
+    <div class="marquee-item">Arbitration</div>
+    <div class="marquee-item">Criminal Defence</div>
+    <div class="marquee-item">Civil Litigation</div>
+    <div class="marquee-item">Corporate Law</div>
+    <div class="marquee-item">Constitutional Matters</div>
+    <div class="marquee-item">Family Law</div>
+    <div class="marquee-item">Intellectual Property</div>
+    <div class="marquee-item">Arbitration</div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="about-left reveal-left">
+    <div>
+      <div class="about-photo">
+        <div class="about-photo-inner">
+          <svg viewBox="0 0 100 130" fill="none">
+            <circle cx="50" cy="36" r="24" stroke="#C0392B" stroke-width="1"/>
+            <path d="M8 130 Q8 80 50 74 Q92 80 92 130" stroke="#C0392B" stroke-width="1" fill="none"/>
+          </svg>
+        </div>
+      </div>
+      <div class="about-meta-item">
+        <div class="about-meta-label">Designation</div>
+        <div class="about-meta-value">Senior Advocate</div>
+      </div>
+      <div class="about-meta-item">
+        <div class="about-meta-label">Courts</div>
+        <div class="about-meta-value">Supreme Court, Bombay High Court, All Tribunals</div>
+      </div>
+      <div class="about-meta-item">
+        <div class="about-meta-label">Languages</div>
+        <div class="about-meta-value">English · Tamil · Hindi</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:'Bebas Neue',sans-serif; font-size:5rem; line-height:1; color:var(--red); letter-spacing:0.02em;">15</div>
+      <div style="font-size:0.65rem; letter-spacing:0.28em; text-transform:uppercase; color:rgba(244,241,236,0.4);">Years of Practice</div>
+    </div>
+  </div>
+
+  <div class="about-right">
+    <div class="about-body">
+      <div class="s-label">About</div>
+      <h2 class="s-heading" style="margin-bottom:2rem;">COUNSEL<br>WITH <span class="italic">conviction</span></h2>
+
+      <p>
+        Alice Fernandes is a Senior Advocate enrolled with the Bar Council of Maharashtra and practising before the Supreme Court of India, Bombay High Court, and all major Tribunals. Her practice is broad by design — she believes exceptional advocacy comes from mastering the full spectrum of law, not just one narrow field.
+      </p>
+      <p>
+        Educated at Government Law College, Mumbai and trained further at the London School of Economics, Alice combines sharp academic grounding with a natural instinct for high-stakes litigation. She is known for meticulous preparation, composed courtroom delivery, and an ability to cut through complexity with clarity.
+      </p>
+      <p>
+        Alice actively serves as amicus curiae in matters of public importance and contributes to legal aid programmes across Maharashtra. Her credo: every client — regardless of means — deserves fearless, informed, and relentless representation.
+      </p>
+
+      <div class="quals-grid">
+        <div class="qual-item"><div class="qual-bullet">▸</div><div class="qual-text">LL.B., Government Law College, Mumbai, 2001</div></div>
+        <div class="qual-item"><div class="qual-bullet">▸</div><div class="qual-text">LL.M., London School of Economics, 2003</div></div>
+        <div class="qual-item"><div class="qual-bullet">▸</div><div class="qual-text">Called to the Bar, Lincoln's Inn, London</div></div>
+        <div class="qual-item"><div class="qual-bullet">▸</div><div class="qual-text">Designated Senior Advocate, 2019</div></div>
+        <div class="qual-item"><div class="qual-bullet">▸</div><div class="qual-text">Member, Bar Council of India</div></div>
+        <div class="qual-item"><div class="qual-bullet">▸</div><div class="qual-text">Legal Aid Committee, Maharashtra</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="practice">
+  <div class="practice-top reveal">
+    <div>
+      <div class="s-label">Expertise</div>
+      <h2 class="s-heading">AREAS OF<br><span class="italic">practice</span></h2>
+    </div>
+    <div class="practice-count">06</div>
+  </div>
+
+  <div class="practice-areas-list">
+    <div class="pa-row reveal">
+      <div class="pa-num">01</div>
+      <div class="pa-content">
+        <div class="pa-title">Criminal Defence & Prosecution</div>
+        <div class="pa-desc">Bail, anticipatory bail, sessions trials, POCSO, NDPS, economic offences, and white-collar crime. Representing accused and complainants at all court levels.</div>
+      </div>
+      <div class="pa-arrow">→</div>
+    </div>
+    <div class="pa-row reveal">
+      <div class="pa-num">02</div>
+      <div class="pa-content">
+        <div class="pa-title">Civil & Property Disputes</div>
+        <div class="pa-desc">Title disputes, partition suits, specific performance, injunctions, damages, landlord-tenant matters, and execution proceedings.</div>
+      </div>
+      <div class="pa-arrow">→</div>
+    </div>
+    <div class="pa-row reveal">
+      <div class="pa-num">03</div>
+      <div class="pa-content">
+        <div class="pa-title">Corporate & Commercial Litigation</div>
+        <div class="pa-desc">Shareholder disputes, M&A conflicts, contract enforcement, IBC insolvency proceedings, and regulatory compliance before NCLT, NCLAT, and High Courts.</div>
+      </div>
+      <div class="pa-arrow">→</div>
+    </div>
+    <div class="pa-row reveal">
+      <div class="pa-num">04</div>
+      <div class="pa-content">
+        <div class="pa-title">Constitutional & Public Law</div>
+        <div class="pa-desc">Fundamental rights, writ petitions, PILs, administrative law challenges, and legislative review before High Courts and the Supreme Court.</div>
+      </div>
+      <div class="pa-arrow">→</div>
+    </div>
+    <div class="pa-row reveal">
+      <div class="pa-num">05</div>
+      <div class="pa-content">
+        <div class="pa-title">Family, Matrimonial & Succession</div>
+        <div class="pa-desc">Divorce, custody, maintenance, domestic violence, adoption, Hindu/Muslim/Christian personal law matters, and testamentary and intestate succession disputes.</div>
+      </div>
+      <div class="pa-arrow">→</div>
+    </div>
+    <div class="pa-row reveal">
+      <div class="pa-num">06</div>
+      <div class="pa-content">
+        <div class="pa-title">Arbitration, Mediation & ADR</div>
+        <div class="pa-desc">Domestic and international arbitration under ICC, SIAC, and LCIA rules. Enforcement of foreign awards under the New York Convention, mediation, and conciliation.</div>
+      </div>
+      <div class="pa-arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<section id="cases">
+  <div class="cases-header">
+    <div class="reveal">
+      <div class="s-label">Track Record</div>
+      <h2 class="s-heading">NOTABLE<br><span class="italic">cases</span></h2>
+    </div>
+    <div class="cases-header-right reveal">
+      <p>A selection of significant matters handled across practice areas. Client details and identifying information are appropriately anonymised in accordance with professional ethics and confidentiality obligations.</p>
+    </div>
+  </div>
+
+  <table class="cases-table reveal">
+    <thead>
+      <tr>
+        <th>Year</th>
+        <th>Matter</th>
+        <th>Area</th>
+        <th>Forum</th>
+        <th>Outcome</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-year">2024</td>
+        <td>
+          <div class="td-title">State v. XYZ Pharmaceuticals Ltd.</div>
+          <div class="td-court">Criminal Appeal — IPC & Drugs & Cosmetics Act</div>
+        </td>
+        <td class="td-area">Criminal</td>
+        <td class="td-court">Supreme Court of India</td>
+        <td><span class="outcome-tag outcome-won">Won</span></td>
+      </tr>
+      <tr>
+        <td class="td-year">2023</td>
+        <td>
+          <div class="td-title">Regal Infrastructure — IBC Insolvency</div>
+          <div class="td-court">Corporate Insolvency Resolution Process</div>
+        </td>
+        <td class="td-area">Corporate</td>
+        <td class="td-court">NCLT Mumbai</td>
+        <td><span class="outcome-tag outcome-settled">Settled</span></td>
+      </tr>
+      <tr>
+        <td class="td-year">2022</td>
+        <td>
+          <div class="td-title">In re: Coastal Regulation Zone — Environment PIL</div>
+          <div class="td-court">Public Interest Litigation — Constitutional</div>
+        </td>
+        <td class="td-area">Constitutional</td>
+        <td class="td-court">Bombay High Court</td>
+        <td><span class="outcome-tag outcome-won">Won</span></td>
+      </tr>
+      <tr>
+        <td class="td-year">2022</td>
+        <td>
+          <div class="td-title">Krishnan & Ors. — Matrimonial Custody Dispute</div>
+          <div class="td-court">Child Custody & Guardianship — Cross-border Jurisdiction</div>
+        </td>
+        <td class="td-area">Family</td>
+        <td class="td-court">Bombay High Court</td>
+        <td><span class="outcome-tag outcome-won">Won</span></td>
+      </tr>
+      <tr>
+        <td class="td-year">2021</td>
+        <td>
+          <div class="td-title">ABC Tech Pvt. Ltd. — Trademark Infringement</div>
+          <div class="td-court">Interim Injunction & Permanent Relief</div>
+        </td>
+        <td class="td-area">IP</td>
+        <td class="td-court">Delhi High Court</td>
+        <td><span class="outcome-tag outcome-won">Won</span></td>
+      </tr>
+      <tr>
+        <td class="td-year">2020</td>
+        <td>
+          <div class="td-title">Global Holdings Ltd. v. Mehta Associates</div>
+          <div class="td-court">₹480 Crore Commercial Dispute — ICC Arbitration</div>
+        </td>
+        <td class="td-area">Arbitration</td>
+        <td class="td-court">ICC Tribunal</td>
+        <td><span class="outcome-tag outcome-settled">Settled</span></td>
+      </tr>
+      <tr>
+        <td class="td-year">2019</td>
+        <td>
+          <div class="td-title">P. Krishnaswamy — Land Acquisition Challenge</div>
+          <div class="td-court">Constitutional Challenge — Article 300A</div>
+        </td>
+        <td class="td-area">Constitutional</td>
+        <td class="td-court">Bombay High Court</td>
+        <td><span class="outcome-tag outcome-won">Won</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="contact">
+  <div class="contact-left reveal-left">
+    <div>
+      <div class="s-label" style="color:rgba(244,241,236,0.4);">
+        <span style="display:inline-block; width:24px; height:2px; background:rgba(192,57,43,0.6); margin-right:0.8rem;"></span>
+        Consult
+      </div>
+      <h2 class="contact-heading">TALK<br>TO ME<br>ABOUT<br><span class="red">YOUR CASE</span></h2>
+      <p class="contact-body">Every legal journey begins with a conversation. Book a confidential initial consultation — I will give you an honest assessment and a clear strategy, no jargon, no false promises.</p>
+    </div>
+
+    <div class="contact-deets">
+      <div class="c-deet">
+        <div class="c-deet-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81a2 2 0 012-2.18H8a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L9.09 14.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.34 1.84.57 2.81.7A2 2 0 0122 22v-5.08z"/></svg>
+        </div>
+        <div>
+          <div class="c-deet-label">Phone</div>
+          <div class="c-deet-value">+91 98201 *****</div>
+        </div>
+      </div>
+      <div class="c-deet">
+        <div class="c-deet-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div>
+          <div class="c-deet-label">Email</div>
+          <div class="c-deet-value"><a href="mailto:alice@fernandeslaw.in">alice@fernandeslaw.in</a></div>
+        </div>
+      </div>
+      <div class="c-deet">
+        <div class="c-deet-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <div class="c-deet-label">Chamber</div>
+          <div class="c-deet-value">Chamber No. 318, Bombay High Court<br>Advocates' Block, Mumbai — 400 032</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-right">
+    <div class="contact-form-title">SEND AN ENQUIRY</div>
+    <form class="cform" id="enquiryForm">
+      <div class="cf-row">
+        <div class="cf-group">
+          <label for="fn">First Name *</label>
+          <input type="text" id="fn" placeholder="Rajan" required>
+        </div>
+        <div class="cf-group">
+          <label for="ln">Last Name *</label>
+          <input type="text" id="ln" placeholder="Iyer" required>
+        </div>
+      </div>
+      <div class="cf-row">
+        <div class="cf-group">
+          <label for="em">Email *</label>
+          <input type="email" id="em" placeholder="rajan@example.com" required>
+        </div>
+        <div class="cf-group">
+          <label for="ph">Phone</label>
+          <input type="tel" id="ph" placeholder="+91 99000 00000">
+        </div>
+      </div>
+      <div class="cf-group">
+        <label for="ar">Practice Area *</label>
+        <select id="ar" required>
+          <option value="" disabled selected>— Select —</option>
+          <option>Criminal Defence</option>
+          <option>Civil & Property</option>
+          <option>Corporate & Commercial</option>
+          <option>Constitutional & Public Law</option>
+          <option>Family & Matrimonial</option>
+          <option>Arbitration & ADR</option>
+          <option>Intellectual Property</option>
+          <option>Other / Not Sure</option>
+        </select>
+      </div>
+      <div class="cf-group">
+        <label for="msg">Describe Your Matter *</label>
+        <textarea id="msg" rows="4" placeholder="Briefly describe your legal situation. All communications are strictly confidential." required></textarea>
+      </div>
+      <div class="cf-privacy">
+        <input type="checkbox" id="prv" required>
+        <label for="prv">I understand that submitting this form does not create an advocate-client relationship.</label>
+      </div>
+      <div class="cf-submit">
+        <button type="submit" class="btn-submit" id="sendBtn">Send Enquiry</button>
+        <span class="cf-or">or call directly</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-wm">ALICE <span>FERNANDES</span></div>
+  <p class="footer-copy">© 2025 Alice Fernandes, Senior Advocate. Bar Council of India Reg. No. MH/2003/0087</p>
+  <ul class="footer-nav">
+    <li><a href="#about">About</a></li>
+    <li><a href="#practice">Practice</a></li>
+    <li><a href="#cases">Cases</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</footer>
+
+<script>
+// Custom cursor
+const cur = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top  = e.clientY + 'px';
+});
+
+// Grow cursor on interactive elements
+document.querySelectorAll('a, button, .pa-row, tr, input, select, textarea').forEach(el => {
+  el.addEventListener('mouseenter', () => cur.classList.add('grow'));
+  el.addEventListener('mouseleave', () => cur.classList.remove('grow'));
+});
+
+// Scroll reveal observer
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal, .reveal-left').forEach((el, i) => {
+  el.style.transitionDelay = (i % 3) * 0.1 + 's';
+  io.observe(el);
+});
+
+// Navigation shadow on scroll
+window.addEventListener('scroll', () => {
+  document.querySelector('nav').style.boxShadow =
+    window.scrollY > 60 ? '0 2px 20px rgba(0,0,0,0.08)' : 'none';
+});
+
+// Form submission handler
+const form = document.getElementById('enquiryForm');
+const btn = document.getElementById('sendBtn');
+
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const originalText = btn.innerText;
+  
+  // Update button to sending state
+  btn.innerText = 'SENDING...';
+  btn.disabled = true;
+  btn.style.opacity = '0.7';
+
+  // Simulate an API call
+  setTimeout(() => {
+    // Show success state
+    btn.innerText = 'ENQUIRY SENT';
+    btn.style.background = '#27AE60'; // Success green
+    btn.style.opacity = '1';
+    
+    alert('Thank you. Your enquiry has been submitted. Alice Fernandes or her chamber office will contact you shortly.');
+
+    // Reset the form
+    form.reset();
+
+    // Revert button after 4 seconds
+    setTimeout(() => {
+      btn.innerText = originalText;
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 4000);
+  }, 2000);
+});
+</script>
+
+</body>
+</html>
